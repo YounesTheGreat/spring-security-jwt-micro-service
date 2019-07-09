@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         AppUser appUser=accountService.loadUserByUsername(username);
         if(appUser==null) throw new UsernameNotFoundException("invalid user");
         Collection<GrantedAuthority> authorities = appUser.getRoles().stream()
-            .map(role -> new SimpleGrantedAuthority(r.getRoleName()))
+            .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
             .collect(Collectors.toList());
         return new User(appUser.getUsername(),appUser.getPassword(),authorities);
     }
